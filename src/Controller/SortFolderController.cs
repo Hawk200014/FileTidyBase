@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileTidyBase.Controller
 {
-    class SortFolderController
+    public class SortFolderController
     {
         private List<SortFolderModel> _sortFolders { get; set; } = new List<SortFolderModel>();
 
@@ -21,15 +21,14 @@ namespace FileTidyBase.Controller
             var sortFolder = new SortFolderModel()
             {
                 FolderPath = folderPath,
-                Name = name,
-                ID = _sortFolders.Count + 1
+                Name = name
             };
             _sortFolders.Add(sortFolder);
         }
 
-        public void RemoveSortFolder(int id)
+        public void RemoveSortFolder(Guid guid)
         {
-            var sortFolder = _sortFolders.FirstOrDefault(f => f.ID == id);
+            var sortFolder = _sortFolders.FirstOrDefault(f => f.GUID == guid);
             if (sortFolder != null)
             {
                 _sortFolders.Remove(sortFolder);

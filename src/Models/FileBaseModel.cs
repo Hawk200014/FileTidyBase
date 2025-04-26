@@ -17,6 +17,7 @@ namespace FileTidyBase.Models
         private string _fileType = "";
         private string _filePath = "";
         private string _newFilePath = "";
+        private string _newFileName = "";
         private string _action = "";
         private FileInfo _fileInfo;
         #endregion
@@ -62,6 +63,18 @@ namespace FileTidyBase.Models
         {
             get { return _action; }
         }
+
+        public string NewFilePath
+        {
+            get { return _newFilePath; }
+            set { _newFilePath = value; }
+        }
+
+        public string NewFileName
+        {
+            get { return _newFileName; }
+            set { _newFileName = value; }
+        }   
         #endregion
 
         #region Public Methods
@@ -82,7 +95,7 @@ namespace FileTidyBase.Models
         public async Task GetFileInfo()
         {
             GetFileName();
-            GetFileType();
+            SetFileType();
             GetFileSize();
             await GetFileContentHash();
         }
@@ -161,7 +174,12 @@ namespace FileTidyBase.Models
             this._fileSize = _fileInfo.Length.ToString();
         }
 
-        private void GetFileType()
+        public string GetFileType()
+        {
+            return _fileType;
+        }
+
+        private void SetFileType()
         {
             this._fileType = _fileInfo.Extension;
         }
