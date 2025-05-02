@@ -131,7 +131,7 @@ namespace FileTidyBase.Models
                     DeleteFile();
                     break;
                 default:
-                    throw new Exception("Invalid action");
+                    break; ;
             }
         }
         #endregion
@@ -164,7 +164,8 @@ namespace FileTidyBase.Models
                 throw new Exception("File does not exist");
             if (System.IO.File.Exists(_newFilePath))
                 throw new Exception("New file path already exists");
-            System.IO.File.Move(this.FilePath, _newFilePath);
+            string filename = string.IsNullOrEmpty(NewFileName) ? _fileName : NewFileName;
+            System.IO.File.Move(this.FilePath, _newFilePath + filename);
             this._filePath = _newFilePath;
             this._newFilePath = "";
         }
